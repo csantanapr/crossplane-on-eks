@@ -144,7 +144,7 @@ module "eks_blueprints_kubernetes_addons" {
   enable_argocd         = true
   argocd_helm_config = {
     namespace = local.argocd_namespace
-    version   = "5.28.0" # ArgoCD v2.6.7
+    version   = "5.32.0" # ArgoCD v2.7.1 from https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/Chart.yaml
     values    = [file("${path.module}/argocd-values.yaml")]
   }
   enable_karpenter      = true
@@ -162,7 +162,7 @@ module "eks_blueprints_crossplane_addons" {
   # Default helm chart and providers values set at https://github.com/aws-ia/terraform-aws-eks-blueprints/blob/main/modules/kubernetes-addons/crossplane/locals.tf
   enable_crossplane = true
   crossplane_helm_config = {
-    version = "1.11.2"
+    version = "1.12.1"
     values = [yamlencode({
       args    = ["--enable-environment-configs"]
       metrics = {
@@ -195,9 +195,9 @@ module "eks_blueprints_crossplane_addons" {
   #---------------------------------------------------------
   crossplane_aws_provider = {
     # !NOTE!: only enable one AWS provider at a time
-    enable          = true
+    enable          = false
     provider_config = "aws-provider-config"
-    provider_aws_version = "v0.38.0"
+    provider_aws_version = "v0.39.0"
     # to override the default irsa policy:
     # additional_irsa_policies = ["arn:aws:iam::aws:policy/AmazonS3FullAccess"]
   }
@@ -209,7 +209,7 @@ module "eks_blueprints_crossplane_addons" {
     # !NOTE!: only enable one AWS provider at a time
     enable          = true
     provider_config = "aws-provider-config"
-    provider_aws_version = "v0.32.1"
+    provider_aws_version = "v0.34.0"
     # to override the default irsa policy:
     # additional_irsa_policies = ["arn:aws:iam::aws:policy/AmazonS3FullAccess"]
   }
