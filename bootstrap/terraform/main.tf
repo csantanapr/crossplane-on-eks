@@ -149,8 +149,8 @@ module "eks_blueprints_kubernetes_addons" {
     chart_version   = "5.32.0" # ArgoCD v2.7.1 from https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/Chart.yaml
     values    = [file("${path.module}/argocd-values.yaml")]
   }
-  enable_metrics_server = var.addons.enable_metrics_server
-  enable_kube_prometheus_stack     = var.addons.enable_kube_prometheus_stack
+  enable_metrics_server = try(var.addons.enable_metrics_server, false)
+  enable_kube_prometheus_stack     = try(var.addons.enable_kube_prometheus_stack, false)
   enable_velero         = var.addons.enable_velero
   velero = {
     values             = [file("${path.module}/velero-values.yaml")]

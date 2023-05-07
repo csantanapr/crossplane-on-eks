@@ -1,4 +1,3 @@
-#tfsec:ignore:*
 module "crossplane" {
   source  = "../../../bootstrap/terraform"
 
@@ -8,13 +7,21 @@ module "crossplane" {
   addons = {
     enable_argocd = false
     enable_crossplane = false
-    enable_metrics_server = false
-    enable_kube_prometheus_stack = false
     enable_velero = true
   }
   velero_bucket = "arn:aws:s3:::origin-s3-bucket-carrlos-crossplane"
-
 }
+
+
+
+
+
+
+
+
+
+
+
 output "configure_kubectl" {
   description = "Configure kubectl: make sure you're logged in with the correct AWS profile and run the following command to update your kubeconfig"
   value       = module.crossplane.configure_kubectl
