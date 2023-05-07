@@ -59,6 +59,9 @@ locals {
     Blueprint  = local.name
     GithubRepo = "github.com/awslabs/crossplane-on-eks"
   }
+
+  velero_s3_backup_location = var.velero_bucket
+
 }
 
 #---------------------------------------------------------------
@@ -89,7 +92,7 @@ module "ebs_csi_driver_irsa" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.10"
+  version = "~> 19.13"
 
   cluster_name                   = local.name
   cluster_version                = local.cluster_version
@@ -139,17 +142,21 @@ module "eks_blueprints_kubernetes_addons" {
   cluster_name          = module.eks.cluster_name
   cluster_endpoint      = module.eks.cluster_endpoint
   cluster_version       = module.eks.cluster_version
-  oidc_provider         = module.eks.oidc_provider
   oidc_provider_arn     = module.eks.oidc_provider_arn
-  enable_argocd         = true
-  argocd_helm_config = {
+  enable_argocd         = var.addons.enable_argocd
+  argocd = {
     namespace = local.argocd_namespace
-    version   = "5.32.0" # ArgoCD v2.7.1 from https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/Chart.yaml
+    chart_version   = "5.32.0" # ArgoCD v2.7.1 from https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/Chart.yaml
     values    = [file("${path.module}/argocd-values.yaml")]
   }
-  enable_karpenter      = true
-  enable_metrics_server = true
-  enable_prometheus     = true
+  enable_metrics_server = var.addons.enable_metrics_server
+  enable_kube_prometheus_stack     = var.addons.enable_kube_prometheus_stack
+  enable_velero         = var.addons.enable_velero
+  velero = {
+    values             = [file("${path.module}/velero-values.yaml")]
+    s3_backup_location = local.velero_s3_backup_location
+  }
+
 
   depends_on = [module.eks.managed_node_groups]
 }

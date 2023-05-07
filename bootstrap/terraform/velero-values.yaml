@@ -1,0 +1,35 @@
+image:
+  repository: velero/velero
+  tag: v1.11.0
+configuration:
+  features: EnableAPIGroupVersions
+
+# schedules:
+#   hourly:
+#     schedule: "@every 1h"
+#     template:
+#       ttl: "48h"
+#       includeClusterResources: true
+#       excludedNamespaces:
+#         - 'kube-system'
+#       excludedResources:
+#         - 'pods'
+#   daily:
+#     schedule: "@every 24h"
+#     template:
+#       ttl: "720h"
+#       includeClusterResources: true
+#       excludedNamespaces:
+#         - 'kube-system'
+#         -
+#       excludedResources:
+#         - 'pods'
+#   monthly:
+#     schedule: "@monthly"
+#     template:
+#       ttl: "8760h"
+#       includeClusterResources: true
+#       excludedNamespaces:
+#         - 'kube-system'
+#       excludedResources:
+#         - 'pods'

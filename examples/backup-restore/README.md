@@ -5,9 +5,35 @@
 
 ## Deploy EKS Clusters
 
-### Deploy Source Cluster on us-west-2 region with 1.25
+### Deploy Source Cluster on us-west-2 region with EKS 1.25
 ```shell
-terraform -chdir=${PWD}/../../bootstrap/terraform init
-terraform -chdir=${PWD}/../../bootstrap/terraform plan -var-file=${PWD}/source.tfvars
-terraform -chdir=${PWD}/../../bootstrap/terraform apply -var-file=${PWD}/source.tfvars -auto-approve
+cd destination
+```
+```shell
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+
+Setup Source terminal
+```shell
+export KUBECONFIG=~/eks-source
+aws eks update-kubeconfig --name crossplane-source --alias crossplane-source --region us-west-2 --kubeconfig ${KUBECONFIG}
+```
+
+### Deploy Destination Cluster on us-east-1 region with EKS 1.26
+```shell
+cd destination
+```
+```shell
+terraform init
+terraform plan
+terraform apply -auto-approve
+```
+
+Setup Destination terminal
+```shell
+export KUBECONFIG=~/eks-destination
+aws eks update-kubeconfig --name crossplane-destination --alias crossplane-destination --region us-east-1 --kubeconfig ${KUBECONFIG}
 ```
