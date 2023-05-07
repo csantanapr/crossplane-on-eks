@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/csantanapr/crossplane-on-eks.git
     targetRevision: velero
-    path: examples/upbound-aws-provider/managed-resources/s3
+    path: examples/backup-restore/s3/bucket.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: default

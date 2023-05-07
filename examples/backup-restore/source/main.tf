@@ -5,8 +5,8 @@ module "crossplane" {
   name            = "crossplane-source"
   cluster_version = "1.25"
   addons = {
-    enable_argocd     = false
-    enable_crossplane = false
+    enable_argocd     = true
+    enable_crossplane = true
     enable_velero     = true
   }
   velero_bucket = "arn:aws:s3:::origin-s3-bucket-carrlos-crossplane"
