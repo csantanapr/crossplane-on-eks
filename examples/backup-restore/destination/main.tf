@@ -6,8 +6,8 @@ module "crossplane" {
   name            = "crossplane-destination"
   cluster_version = "1.26"
   addons = {
-    enable_argocd     = false
-    enable_crossplane = false
+    enable_argocd     = true
+    enable_crossplane = true
     enable_velero     = true
   }
   velero_bucket = "arn:aws:s3:::replica-s3-bucket-carrlos-crossplane"

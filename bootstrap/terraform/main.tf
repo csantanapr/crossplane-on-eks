@@ -167,7 +167,7 @@ module "eks_blueprints_crossplane_addons" {
   eks_cluster_id = module.eks.cluster_name
   # Deploy Crossplane
   # Default helm chart and providers values set at https://github.com/aws-ia/terraform-aws-eks-blueprints/blob/main/modules/kubernetes-addons/crossplane/locals.tf
-  enable_crossplane = true
+  enable_crossplane = var.addons.enable_crossplane
   crossplane_helm_config = {
     version = "1.12.1"
     values = [yamlencode({
