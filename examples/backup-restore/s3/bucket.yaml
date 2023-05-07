@@ -3,7 +3,7 @@ kind: Bucket
 metadata:
   name: upbound-test-bucket
   annotations:
-    crossplane.io/external-name: aws-provider-upbound-s3-bucket
+    crossplane.io/external-name: demo-crossplane-carrlos
   labels:
     testing.upbound.io/example-name: s3
 spec:
