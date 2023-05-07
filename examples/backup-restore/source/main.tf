@@ -1,13 +1,13 @@
 module "crossplane" {
-  source  = "../../../bootstrap/terraform"
+  source = "../../../bootstrap/terraform"
 
-  region = "us-west-2"
-  name = "crossplane-source"
+  region          = "us-west-2"
+  name            = "crossplane-source"
   cluster_version = "1.25"
   addons = {
-    enable_argocd = false
+    enable_argocd     = false
     enable_crossplane = false
-    enable_velero = true
+    enable_velero     = true
   }
   velero_bucket = "arn:aws:s3:::origin-s3-bucket-carrlos-crossplane"
 }

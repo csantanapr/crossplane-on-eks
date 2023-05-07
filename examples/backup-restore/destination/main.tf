@@ -1,14 +1,14 @@
 #tfsec:ignore:*
 module "crossplane" {
-  source  = "../../../bootstrap/terraform"
+  source = "../../../bootstrap/terraform"
 
-  region = "us-east-1"
-  name = "crossplane-destination"
+  region          = "us-east-1"
+  name            = "crossplane-destination"
   cluster_version = "1.26"
   addons = {
-    enable_argocd = false
+    enable_argocd     = false
     enable_crossplane = false
-    enable_velero = true
+    enable_velero     = true
   }
   velero_bucket = "arn:aws:s3:::replica-s3-bucket-carrlos-crossplane"
 
