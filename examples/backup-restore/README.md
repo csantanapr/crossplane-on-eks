@@ -62,20 +62,17 @@ velero backup create gitops-control-planes --exclude-namespaces default,velero,k
 ```
 
 Notes:
-```shell
-velero backup create xp-backup-manual-crds2 --include-cluster-scoped-resources '*.crossplane.io' --include-namespaces crossplane-system --exclude-namespace-scoped-resources pods
-```
 
 backup only s3 bucket
 ```shell
-velero backup create crossplane-mrs --include-cluster-scoped-resources buckets.s3.aws.upbound.io --exclude-namespaces default,velero,kube-node-lease,kube-public,kube-system,argocd,crossplane-system
+velero backup create crossplane-mrs --include-cluster-scoped-resources buckets.s3.aws.upbound.io --exclude-namespaces platform,default,velero,kube-node-lease,kube-public,kube-system,argocd,crossplane-system
 ```
 
-
-Simulate failure on source cluster
+backup s3 claim
 ```shell
-
+velero backup create xp-claim --include-namespaces platform --include-cluster-scoped-resources '*.crossplane.io,*.awsblueprints.io'
 ```
+
 
 ### Restore on the Destination cluster
 Check backup is available
