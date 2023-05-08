@@ -61,6 +61,11 @@ echo "$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.
 velero backup create gitops-control-planes --exclude-namespaces default,velero,kube-node-lease,kube-public,kube-system --exclude pods
 ```
 
+Notes:
+```shell
+velero backup create xp-backup-manual-crds2 --include-cluster-scoped-resources '*.crossplane.io' --include-namespaces crossplane-system --exclude-namespace-scoped-resources pods
+```
+
 backup only s3 bucket
 ```shell
 velero backup create crossplane-mrs --include-cluster-scoped-resources buckets.s3.aws.upbound.io --exclude-namespaces default,velero,kube-node-lease,kube-public,kube-system,argocd,crossplane-system
