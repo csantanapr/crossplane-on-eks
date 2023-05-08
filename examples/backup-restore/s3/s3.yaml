@@ -2,7 +2,6 @@ apiVersion: awsblueprints.io/v1alpha1
 kind: ObjectStorage
 metadata:
   name: s3-bucket-from-claim-gitopscon
-  namespace: default
 spec:
   compositionSelector:
     matchLabels:
